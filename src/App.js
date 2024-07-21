@@ -7,25 +7,26 @@ import BackgroundLayout from './BackgroundLayout';
 function App() {
   const [weather, setWeather] = useState(null);
 
-  const fetchWeatherData = async () => {
-    try {
-      const response = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=London&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`
-      );
-      const data = await response.json();
-      setWeather({
-        temperature: data.main.temp,
-        windspeed: data.wind.speed,
-        humidity: data.main.humidity,
-        place: data.name,
-        heatIndex: data.main.feels_like,
-        iconString: data.weather[0].main,
-        conditions: data.weather[0].description,
-      });
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-    }
-  };
+const fetchWeatherData = async () => {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}&units=metric`
+    );
+    const data = await response.json();
+    setWeather({
+      temperature: data.main.temp,
+      windspeed: data.wind.speed,
+      humidity: data.main.humidity,
+      place: data.name,
+      heatIndex: data.main.feels_like,
+      iconString: data.weather[0].main,
+      conditions: data.weather[0].description,
+    });
+  } catch (error) {
+    console.error('Error fetching weather data:', error);
+  }
+};
+
 
   useEffect(() => {
     fetchWeatherData();
@@ -42,7 +43,7 @@ function App() {
           <div className='overlay-content'>
         
             <div className='weather-card-container'>
-              {weather && <WeatherCard apiEndpoint="http://api.openweathermap.org/data/2.5/weather" />}
+              {weather && <WeatherCard apiEndpoint="https://api.openweathermap.org/data/2.5/weather" />}
             </div>
             <div className='register-form-container'>
               <RegisterForm />
