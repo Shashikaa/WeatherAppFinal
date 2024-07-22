@@ -24,7 +24,7 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:10000/api/weather/register', { email, location });
+      const response = await axios.post('https://weatherappbackend-gipu.onrender.com/api/weather/register', { email, location });
       setMessage(response.data.message);
       if (response.data.message.includes('already registered')) {
         setRegistrationError('This email is already registered.');
